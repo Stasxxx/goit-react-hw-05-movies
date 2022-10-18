@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addMovies } from "services/api";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
     const [trendingMovies, setTrendingMovies] = useState([])
+   
+    useEffect(() => {
+        const getMoviesList = async () => {
+            const moviesList = await addMovies()
+            setTrendingMovies([...moviesList])
+        }
+        
+        getMoviesList()
+    }, []);
+   
     
-    const getMoviesList = async () => {
-    const moviesList = await addMovies()
-    setTrendingMovies([...moviesList])
-    }
-    getMoviesList()
     
     return (
         <>
