@@ -1,4 +1,10 @@
 
 export const SearchMovies = () => {
-    return null
+    return (
+        <>
+        <input>
+        </input>
+            <button>Serch</button>
+        </>
+    )
 }

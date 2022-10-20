@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import { Outlet, useParams, Link, useLocation } from "react-router-dom"
 import { addMovieDetails } from "services/api";
+import { BackLink } from "components/BackLink/BackLink";
 
 export const MovieDetails = () => {
     const { id } = useParams();
@@ -26,8 +27,8 @@ export const MovieDetails = () => {
     
     return (
         <>
-            
-                <Link to={backLinkHref}>Go back</Link>
+            <BackLink to={backLinkHref}>Go back</BackLink>
+            {/* <Link to={backLinkHref}>Go back</Link> */}
             <div>
                 <div>
                    {movie.poster_path && <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.original_title} width="200"></img>} 
