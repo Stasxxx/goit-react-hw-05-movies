@@ -1,10 +1,15 @@
 import { useEffect,useState } from "react";
-import { Outlet, useParams, Link } from "react-router-dom"
+import { Outlet, useParams, Link, useLocation } from "react-router-dom"
 import { addMovieDetails } from "services/api";
 
 export const MovieDetails = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
+    const location = useLocation();
+    const backLinkHref = location.state?.from ?? "/"
+
+    const userScore = Math.trunc(movie.vote_average * 10)
+    let genres = movie.genres ? [...movie.genres] : false;
     // console.log(movie.genres)
     useEffect(() => {
         const movieDetails = async () => {
@@ -15,15 +20,17 @@ export const MovieDetails = () => {
         movieDetails()
 
     }, [id]);
-    const userScore = Math.trunc(movie.vote_average * 10)
-    let genres = movie.genres ? [...movie.genres] : false;
+
+    
+    
     
     return (
         <>
-            <button>Go back</button>
+            
+                <Link to={backLinkHref}>Go back</Link>
             <div>
                 <div>
-                    <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.original_title} width="200"></img>
+                   {movie.poster_path && <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.original_title} width="200"></img>} 
                 </div>
                 <div>
                     <p>{movie.original_title}</p>
