@@ -2,6 +2,7 @@ import { useEffect,useState } from "react";
 import { Outlet, useParams, Link, useLocation } from "react-router-dom"
 import { addMovieDetails } from "services/api";
 import { BackLink } from "components/BackLink/BackLink";
+import { MovieCard } from "./MovieDetails.styled";
 
 export const MovieDetails = () => {
     const { id } = useParams();
@@ -21,26 +22,25 @@ export const MovieDetails = () => {
         movieDetails()
 
     }, [id]);
-
-    
-    
     
     return (
         <>
             <BackLink to={backLinkHref}>Go back</BackLink>
-            {/* <Link to={backLinkHref}>Go back</Link> */}
+
             <div>
-                <div>
-                   {movie.poster_path && <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.original_title} width="200"></img>} 
-                </div>
-                <div>
-                    <p>{movie.original_title}</p>
-                    <p>User Score: {userScore}%</p>
-                    <p>Overview</p>
-                    <p>{ movie.overview }</p>
-                    <p>Genres</p>
-                    {genres && genres.map(({ name }) => <span>{name}</span>)}
-                </div>
+                <MovieCard>
+                    <div>
+                        {movie.poster_path && <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.original_title} width="200"></img>} 
+                    </div>
+                    <div>
+                        <p>{movie.original_title}</p>
+                        <p>User Score: {userScore}%</p>
+                        <p>Overview</p>
+                        <p>{ movie.overview }</p>
+                        <p>Genres</p>
+                        {genres && genres.map(({ name, id }) => <span key={id}>{name}</span>)}
+                    </div>
+                </MovieCard>
                 <div>
                     <h2>Additional information</h2>
                 </div>
@@ -53,9 +53,10 @@ export const MovieDetails = () => {
                             <Link to="reviews">Reviews</Link>
                         </li>
                     </ul>
+                    <Outlet/>
                 </div>
                 
-                <Outlet/>
+                
             </div>
         </>
     )
