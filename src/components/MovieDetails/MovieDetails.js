@@ -9,10 +9,10 @@ export const MovieDetails = () => {
     const [movie, setMovie] = useState([]);
     const location = useLocation();
     const backLinkHref = location.state?.from ?? "/"
-
+    // console.log(backLinkHref)
     const userScore = Math.trunc(movie.vote_average * 10)
     let genres = movie.genres ? [...movie.genres] : false;
-    // console.log(movie.genres)
+    
     useEffect(() => {
         const movieDetails = async () => {
             const movieItem = await addMovieDetails(id)
@@ -53,10 +53,9 @@ export const MovieDetails = () => {
                             <Link to="reviews">Reviews</Link>
                         </li>
                     </ul>
-                    <Outlet/>
                 </div>
                 
-                
+                <Outlet/>
             </div>
         </>
     )
