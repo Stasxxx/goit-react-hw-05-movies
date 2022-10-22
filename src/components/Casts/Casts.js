@@ -8,22 +8,27 @@ export const Casts = () => {
 
     // console.log(id)
     useEffect(() => {
-        const movieCosts = async () => {
+        const movieCasts = async () => {
             const cast = await addCasts(id)
             setActors(cast)
         }
-        
-        return () => {
-            movieCosts()
-        }
-    },[id])
+        movieCasts()
+        // return () => {
+            
+        // }
+    }, [id])
     // console.log(actors)
     return (
         <div>
             <div>
            {actors.length>0 && <img src={`https://image.tmdb.org/t/p/w500/${actors[0].profile_path}`} alt={actors[0].original_name} width="100"></img>} 
             </div>
-           {actors.length>0 && <p>{ actors[0].original_name}</p>}
+            {actors.length > 0 && 
+                <>
+                    <p>{actors[0].original_name}</p>
+                    <p>Character: {actors[0].character}</p>
+                </>
+            }
         </div>
     )
 }
