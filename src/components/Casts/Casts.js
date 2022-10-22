@@ -6,18 +6,16 @@ export const Casts = () => {
     const [actors, setActors] = useState([])
     const { id } = useParams();
 
-    // console.log(id)
+    
     useEffect(() => {
         const movieCasts = async () => {
             const cast = await addCasts(id)
             setActors(cast)
         }
         movieCasts()
-        // return () => {
-            
-        // }
+        
     }, [id])
-    // console.log(actors)
+
     return (
         <div>
             <div>

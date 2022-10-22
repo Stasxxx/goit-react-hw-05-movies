@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet,Link, useSearchParams, useLocation } from "react-router-dom";
 import { searchMovie } from "services/api";
 
@@ -8,26 +8,33 @@ export const SearchMovies = () => {
     const [movieList, setMovieList] = useState('');
     const [searchMovieParams, setSearchMovieParams] = useSearchParams();
     const nameOfMovie = searchMovieParams.get('name') ?? '';
-    // console.log(nameOfMovie)
+    let savedName = movieName !== '' ? movieName : nameOfMovie;
 
-    const handleMovie = e => {
-        const name = e.currentTarget.value
-        setMovieName(name);
-       const nextName = name !== "" ? {name} : {}
-        setSearchMovieParams(nextName)
-    }
-
+    
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-        const movies = await searchMovie(movieName);
-        // console.log(movies)
-        setMovieList(movies)
+        const name = e.currentTarget.elements.query.value
+        
+        const nextName = name !== "" ? {name} : {}
+        setSearchMovieParams(nextName);
+        setMovieName(name)
         
     }
+    useEffect(() => {
+        const getMoviesList = async () => {
+            
+            if (savedName !== '') {
+                const movies = await searchMovie(savedName);
+            setMovieList(movies)
+            }
+        }
+        getMoviesList()
+    }, [savedName])
+
     return (
         <>
         <form onSubmit={handleFormSubmit}>
-            <input type="text" value={nameOfMovie} onChange={handleMovie}></input>
+            <input name="query" type="text"></input>
             <button type="submit" >Serch</button>
         </form>
         

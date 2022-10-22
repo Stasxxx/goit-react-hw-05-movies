@@ -4,7 +4,7 @@ import { addMovieDetails } from "services/api";
 import { BackLink } from "components/BackLink/BackLink";
 import { MovieCard } from "./MovieDetails.styled";
 
-export const MovieDetails = () => {
+export const MovieDetails = ({ onChange }) => {
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
     const location = useLocation();
@@ -47,10 +47,10 @@ export const MovieDetails = () => {
                 <div>
                     <ul>
                         <li>
-                            <Link to="casts">Casts</Link>
+                            <Link to="casts" state={{ from: backLinkHref }}>Casts</Link>
                         </li>
                         <li>
-                            <Link to="reviews">Reviews</Link>
+                            <Link to="reviews" state={{ from: backLinkHref }}>Reviews</Link>
                         </li>
                     </ul>
                 </div>
