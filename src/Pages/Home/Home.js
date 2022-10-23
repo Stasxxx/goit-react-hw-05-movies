@@ -16,7 +16,7 @@ export const Home = () => {
    
     
     return (
-        <>
+        <section>
             <h2>Trending today</h2>
             <ul>
                 {trendingMovies.map(({id, title,}) => (
@@ -26,6 +26,6 @@ export const Home = () => {
                 ))}
                 
             </ul>
-        </>
+        </section>
     )
 };
