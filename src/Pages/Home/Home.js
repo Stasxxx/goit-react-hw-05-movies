@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { addMovies } from "services/api";
-import { Link } from "react-router-dom";
+import { Section, LinkMovie,Item } from "./Home.styled";
 
 export const Home = () => {
     const [trendingMovies, setTrendingMovies] = useState([])
@@ -16,16 +16,16 @@ export const Home = () => {
    
     
     return (
-        <section>
+        <Section>
             <h2>Trending today</h2>
             <ul>
-                {trendingMovies.map(({id, title,}) => (
-                <li key={id}>
-                 <Link to={`/movies/${id}`}>{title}</Link>   
-                </li>
+                {trendingMovies.map(({id, title}) => (
+                <Item key={id}>
+                 <LinkMovie to={`/movies/${id}`}>{title}</LinkMovie>   
+                </Item>
                 ))}
                 
             </ul>
-        </section>
+        </Section>
     )
 };

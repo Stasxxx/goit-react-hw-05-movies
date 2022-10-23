@@ -3,6 +3,7 @@ import { Outlet, useSearchParams, } from "react-router-dom";
 import { searchMovie } from "services/api";
 import { Seachbar } from "components/Seachbar/Searchbar"
 import { MovieSearchList } from "components/MovieSeachList/MovieSeachList";
+import { Section } from "./Movies.styled";
 
 export const SearchMovies = () => {
     const [movieName, setMovieName] = useState('');
@@ -33,12 +34,10 @@ export const SearchMovies = () => {
     }, [savedName])
 
     return (
-        <section>
-            
-        <Seachbar onSubmit={handleFormSubmit} />
-        {movieList !== '' && <MovieSearchList movies={movieList}/> }
-
-        <Outlet/>
-        </section>
+        <Section>            
+            <Seachbar onSubmit={handleFormSubmit} />
+            {movieList !== '' && <MovieSearchList movies={movieList}/> }
+            <Outlet/>
+        </Section>
     )
 }

@@ -16,19 +16,21 @@ export const Reviews = () => {
     
     return (
     <>
-        {filmReviews.length === 0 && <p>We don't have any reviews for this movie.</p>}; 
+        {filmReviews.length === 0 && <p>We don't have any reviews for this movie.</p>}
         
-        {
-        filmReviews.length > 0 &&
-            <div>
+        {filmReviews.length > 0 &&
+        <>
+            {filmReviews.map(({ author, content,id }) => (
+            <div key={id}>
                 <ul>
-                    <li>Author:{filmReviews[0].author}
-                        <p>{ filmReviews[0].content}</p>
+                    <li>Author:{author}
+                        <p>{content}</p>
                     </li>
                 </ul>
             </div>
-        };
-        
+            ))}
+        </>
+        }
     </>
     )
 }
