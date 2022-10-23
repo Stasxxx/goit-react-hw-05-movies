@@ -1,10 +1,10 @@
-import { useEffect,useState } from "react";
+import { Suspense, useEffect,useState } from "react";
 import { Outlet, useParams, Link, useLocation } from "react-router-dom"
 import { addMovieDetails } from "services/api";
 import { BackLink } from "components/BackLink/BackLink";
 import { MovieCard, FilmDetails,FilmName, FilmTitleItem, MovieAdditional } from "./MovieDetails.styled";
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
     const location = useLocation();
@@ -50,9 +50,12 @@ export const MovieDetails = () => {
                         </li>
                     </ul>
                 </MovieAdditional>
-                
-                <Outlet/>
+                <Suspense>
+                    <Outlet />
+                </Suspense>
             </div>
         </>
     )
 }
+
+export default MovieDetails

@@ -5,7 +5,7 @@ import { Seachbar } from "components/Seachbar/Searchbar"
 import { MovieSearchList } from "components/MovieSeachList/MovieSeachList";
 import { Section } from "./Movies.styled";
 
-export const SearchMovies = () => {
+const SearchMovies = () => {
     const [movieName, setMovieName] = useState('');
     const [movieList, setMovieList] = useState('');
     const [searchMovieParams, setSearchMovieParams] = useSearchParams();
@@ -36,8 +36,11 @@ export const SearchMovies = () => {
     return (
         <Section>            
             <Seachbar onSubmit={handleFormSubmit} />
-            {movieList !== '' && <MovieSearchList movies={movieList}/> }
+            {movieList !== '' && <MovieSearchList movies={movieList} />}
+            
             <Outlet/>
         </Section>
     )
 }
+
+export default SearchMovies

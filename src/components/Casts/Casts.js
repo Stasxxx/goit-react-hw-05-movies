@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Section } from "./Casts.styled";
 
-export const Casts = () => {
+const Casts = () => {
     const [actors, setActors] = useState([])
     const { id } = useParams();
 
@@ -40,3 +40,5 @@ export const Casts = () => {
         
     )
 }
+
+export default Casts
